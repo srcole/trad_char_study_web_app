@@ -1,7 +1,7 @@
 let characters = [], gameCharacters = [], currentCharacter = null, results = [];
 let correctAnswers = 0, totalAnswers = 0, questionNumber = 0;
 const byId = id => document.getElementById(id);
-const homeScreen = byId("homeScreen"), gameScreen = byId("gameScreen");
+const homeScreen = byId("homeScreen"), gameScreen = byId("gameScreen"), endScreen = byId("endScreen");
 const maxPriority = byId("maxPriority"), minKnown = byId("minKnown");
 const exportCsv = byId("exportCsv");
 const startButton = byId("startButton"), selectionSummary = byId("selectionSummary");
@@ -9,6 +9,7 @@ const traditionalCharacter = byId("traditionalCharacter"), answerInput = byId("a
 const answerForm = byId("answerForm"), submitButton = byId("submitButton");
 const feedback = byId("feedback"), resultMessage = byId("resultMessage");
 const correctCharacter = byId("correctCharacter"), pinyin = byId("pinyin"), english = byId("english");
+const examples = byId("examples");
 const nextButton = byId("nextButton"), correctCount = byId("correctCount");
 const totalCount = byId("totalCount"), accuracy = byId("accuracy");
 const progress = byId("progress"), errorMessage = byId("errorMessage");
@@ -65,19 +66,27 @@ function updateSelectionSummary() {
 }
 
 function startGame() {
-  gameCharacters = selectedCharacters(); if (!gameCharacters.length) return;
+  gameCharacters = shuffle(selectedCharacters()); if (!gameCharacters.length) return;
   currentCharacter = null; results = []; correctAnswers = 0; totalAnswers = 0; questionNumber = 0;
   updateStats();
-  homeScreen.classList.add("hidden"); gameScreen.classList.remove("hidden"); nextQuestion();
+  homeScreen.classList.add("hidden"); endScreen.classList.add("hidden");
+  gameScreen.classList.remove("hidden"); nextQuestion();
+}
+
+function shuffle(items) {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
 }
 
 function nextQuestion() {
-  if (!gameCharacters.length) return;
-  let newCharacter;
-  do { newCharacter = gameCharacters[Math.floor(Math.random() * gameCharacters.length)]; }
-  while (gameCharacters.length > 1 && currentCharacter && newCharacter.idx === currentCharacter.idx);
-  currentCharacter = newCharacter; questionNumber++;
-  traditionalCharacter.textContent = currentCharacter.trad; progress.textContent = `Question ${questionNumber}`;
+  if (!gameCharacters.length) { endGame(true); return; }
+  currentCharacter = gameCharacters.pop(); questionNumber++;
+  traditionalCharacter.textContent = currentCharacter.trad;
+  progress.textContent = `Question ${questionNumber} of ${questionNumber + gameCharacters.length}`;
   answerInput.value = ""; answerInput.disabled = false; submitButton.disabled = false;
   feedback.classList.add("hidden"); answerInput.focus();
 }
@@ -91,13 +100,21 @@ answerForm.addEventListener("submit", event => {
   resultMessage.textContent = isCorrect ? "Correct!" : `Not quite. You answered: ${userAnswer}`;
   resultMessage.className = isCorrect ? "correct" : "incorrect";
   correctCharacter.textContent = currentCharacter.simp; pinyin.textContent = currentCharacter.pinyin || "—";
-  english.textContent = currentCharacter.English || "—"; updateStats();
+  english.textContent = currentCharacter.English || "—";
+  examples.textContent = formatExamples(currentCharacter.examples);
+  updateStats();
   answerInput.disabled = true; submitButton.disabled = true; feedback.classList.remove("hidden");
+  if (!gameCharacters.length) endGame(true);
 });
 
 function updateStats() {
   correctCount.textContent = correctAnswers; totalCount.textContent = totalAnswers;
   accuracy.textContent = `${totalAnswers ? Math.round(correctAnswers / totalAnswers * 100) : 0}%`;
+}
+
+function formatExamples(value) {
+  if (!value) return "—";
+  return value.split(";").map(example => example.trim()).filter(Boolean).join(" · ");
 }
 
 function makeResultsCSV() {
@@ -108,7 +125,7 @@ function makeResultsCSV() {
   return ["index,correct", ...rows].join("\n");
 }
 
-function endGame() {
+function endGame(completed = false) {
   if (exportCsv.checked) {
     const csv = makeResultsCSV();
     const blobUrl = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
@@ -116,11 +133,33 @@ function endGame() {
     link.download = `traditional-character-results-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(blobUrl);
   }
-  gameScreen.classList.add("hidden"); homeScreen.classList.remove("hidden"); currentCharacter = null;
+  const percent = totalAnswers ? Math.round(correctAnswers / totalAnswers * 100) : 0;
+  byId("endTitle").textContent = completed ? "Game complete!" : "Game ended";
+  byId("endMessage").textContent = completed
+    ? "You answered every available character. Great work!"
+    : "Your progress has been recorded. Return home when you are ready.";
+  const finalExamples = byId("finalExamples");
+  if (completed && currentCharacter?.examples) {
+    finalExamples.textContent = `Final examples: ${formatExamples(currentCharacter.examples)}`;
+    finalExamples.classList.remove("hidden");
+  } else {
+    finalExamples.textContent = "";
+    finalExamples.classList.add("hidden");
+  }
+  byId("endCorrect").textContent = correctAnswers;
+  byId("endAnswered").textContent = totalAnswers;
+  byId("endAccuracy").textContent = `${percent}%`;
+  gameScreen.classList.add("hidden"); endScreen.classList.remove("hidden"); currentCharacter = null;
+}
+
+function goHome() {
+  endScreen.classList.add("hidden");
+  homeScreen.classList.remove("hidden");
 }
 
 answerInput.addEventListener("input", () => { answerInput.value = Array.from(answerInput.value).slice(0, 10).join(""); });
 maxPriority.addEventListener("input", updateSelectionSummary); minKnown.addEventListener("input", updateSelectionSummary);
 startButton.addEventListener("click", startGame); nextButton.addEventListener("click", nextQuestion);
-byId("endGameButton").addEventListener("click", endGame);
+byId("endGameButton").addEventListener("click", () => endGame(false));
+byId("homeButton").addEventListener("click", goHome);
 loadCharacters();

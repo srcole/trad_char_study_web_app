@@ -1,168 +1,159 @@
-trad,simp,pinyin,English,idx,priority,diff,known
-這,这,zhè,this,1,1,,5
-來,来,lái,to come,2,1,,3
-國,国,guó,country,3,1,,3
-個,个,gè,measure word (general),4,1,,5
-說,说,shuō,to speak,5,1,,3
-們,们,men,plural marker,6,1,,3
-為,为,wèi,for / because,7,1,,5
-時,时,shí,time,8,1,,3
-會,会,huì,can / will,9,1,,5
-過,过,guò,to cross / past,10,1,,5
-學,学,xué,to learn,11,1,,3
-對,对,duì,towards / correct,12,1,,5
-裡,里,lǐ,inside,13,1,,5
-後,后,hòu,after / behind,14,1,,5
-麼,么,me,question particle,15,1,,5
-沒,没,méi,not have,16,1,,5
-於,于,yú,in / at / on,17,1,,5
-還,还,hái,still / yet,18,1,,5
-發,发,fā,to send / emit,19,1,,5
-隻,只,zhī,measure word (animals),20,1,,5
-當,当,dāng,to act as / should,21,1,,5
-開,开,kāi,to open,22,1,,3
-實,实,shí,real / true,23,1,,
-經,经,jīng,classic / to pass,24,1,,
-進,进,jìn,to enter,25,1,,
-現,现,xiàn,now / to appear,26,1,,
-長,长,cháng,long,27,1,,
-動,动,dòng,to move,28,1,,
-樣,样,yàng,kind / type,29,1,,
-頭,头,tóu,head,30,1,,
-機,机,jī,machine,31,1,,
-無,无,wú,without,32,1,,
-關,关,guān,to close / related,33,1,,
-從,从,cóng,from,34,1,,
-見,见,jiàn,to see,35,1,,
-馬,马,mǎ,horse,36,1,,
-車,车,chē,vehicle,37,1,,
-記,记,jì,to remember,38,1,,
-東,东,dōng,east,39,1,,
-難,难,nán,difficult,40,1,,
-點,点,diǎn,point / dot,41,1,,
-貝,贝,bèi,shell / surname,42,1,,
-聲,声,shēng,sound,43,2,,
-報,报,bào,to report,44,2,,
-將,将,jiāng,will / shall,45,2,,
-寫,写,xiě,to write,46,2,,
-親,亲,qīn,parent / relative,47,2,,
-愛,爱,ài,to love,48,2,,
-張,张,zhāng,measure word / surname,49,2,,
-則,则,zé,rule / standard,50,2,,
-認,认,rèn,to recognize,51,2,,
-邊,边,biān,side / edge,52,2,,
-變,变,biàn,to change,53,2,,
-許,许,xǔ,to allow,54,2,,
-問,问,wèn,to ask,55,2,,
-講,讲,jiǎng,to speak / explain,56,2,,
-論,论,lùn,to discuss,57,2,,
-書,书,shū,book,58,2,,
-遠,远,yuǎn,far,59,2,,
-廠,厂,chǎng,factory,60,2,,
-黨,党,dǎng,party (political),61,2,,
-萬,万,wàn,ten thousand,62,2,,
-門,门,mén,door / gate,63,2,,
-風,风,fēng,wind,64,2,,
-語,语,yǔ,language,65,2,,
-單,单,dān,single,66,2,,
-臺,台,tái,platform / stand,67,2,,
-華,华,huá,China / splendid,68,2,,
-鮮,鲜,xiān,fresh,69,2,,
-衛,卫,wèi,to guard,70,2,,
-陽,阳,yáng,sun / positive,71,2,,
-陰,阴,yīn,negative / shade,72,2,,
-雲,云,yún,cloud / surname,73,2,,
-響,响,xiǎng,sound / to resound,74,3,,
-務,务,wù,affair / business,75,3,,
-帶,带,dài,to bring,76,3,,
-業,业,yè,business / industry,77,3,,
-畫,画,huà,picture / to draw,78,3,,
-場,场,chǎng,field / place,79,3,,
-達,达,dá,to reach,80,3,,
-觀,观,guān,to view,81,3,,
-辦,办,bàn,to handle / do,82,3,,
-眾,众,zhòng,crowd / masses,83,3,,
-體,体,tǐ,body / form,84,3,,
-備,备,bèi,to prepare,85,3,,
-隊,队,duì,team,86,3,,
-該,该,gāi,should / ought,87,3,,
-擊,击,jī,to strike,88,3,,
-舊,旧,jiù,old (not new),89,3,,
-導,导,dǎo,to guide,90,3,,
-製,制,zhì,to make / system,91,3,,
-況,况,kuàng,situation,92,3,,
-縣,县,xiàn,county,93,3,,
-層,层,céng,layer,94,3,,
-節,节,jié,festival / section,95,3,,
-細,细,xì,thin / fine,96,3,,
-麗,丽,lì,beautiful,97,3,,
-藥,药,yào,medicine,98,3,,
-陸,陆,lù,land,99,3,,
-錢,钱,qián,money,100,3,,
-謝,谢,xiè,to thank / surname,101,3,,
-費,费,fèi,to cost / surname,102,3,,
-湯,汤,tāng,soup / surname,103,3,,
-畢,毕,bì,complete / surname,104,3,,
-樂,乐,lè,happy / surname,105,3,,
-黃,黄,huáng,yellow / surname,106,3,,
-紀,纪,jǐ,surname,107,3,,
-藍,蓝,lán,blue / surname,108,3,,
-強,强,qiáng,strong / surname,109,3,,
-鍾,钟,zhōng,clock / surname,110,3,,
-經,经,jīng,surname,111,3,,
-應,应,yīng,should / surname,112,3,,
-龍,龙,lóng,dragon / surname,113,3,,
-從,从,cóng,surname,114,3,,
-喬,乔,qiáo,tall / surname,115,3,,
-陰,阴,yīn,surname,116,3,,
-雙,双,shuāng,pair / surname,117,3,,
-黨,党,dǎng,surname,118,3,,
-勞,劳,láo,toil / surname,119,3,,
-農,农,nóng,farming / surname,120,3,,
-習,习,xí,to practice / surname,121,3,,
-魚,鱼,yú,fish / surname,122,3,,
-廣,广,guǎng,wide / surname,123,3,,
-關,关,guān,surname,124,3,,
-陳,陈,chén,surname,125,4,,
-趙,赵,zhào,surname,126,4,,
-孫,孙,sūn,surname,127,4,,
-許,许,xǔ,surname,128,4,,
-何,何,hé,what / surname,129,4,,
-施,施,shī,to apply / surname,130,4,,
-孔,孔,kǒng,hole / surname,131,4,,
-嚴,严,yán,strict,132,4,,
-姜,姜,jiāng,ginger,133,4,,
-章,章,zhāng,chapter / surname,134,4,,
-蘇,苏,sū,revive / surname,135,4,,
-羅,罗,luó,net / surname,136,4,,
-項,项,xiàng,neck / surname,137,4,,
-顏,颜,yán,face / surname,138,4,,
-計,计,jì,plan / surname,139,4,,
-談,谈,tán,to talk / surname,140,4,,
-單,单,shàn,surname,141,4,,
-懷,怀,huái,to cherish / surname,142,4,,
-蒼,苍,cāng,dark green / surname,143,4,,
-聞,闻,wén,to hear / surname,144,4,,
-卻,却,què,but / to retreat,145,4,,
-邊,边,biān,surname,146,4,,
-溫,温,wēn,warm / surname,147,4,,
-莊,庄,zhuāng,village / surname,148,4,,
-連,连,lián,to link / surname,149,4,,
-終,终,zhōng,end / surname,150,4,,
-簡,简,jiǎn,simple / surname,151,4,,
-養,养,yǎng,to raise / surname,152,4,,
-紅,红,hóng,red / surname,153,4,,
-蓋,盖,gài,to cover / surname,154,4,,
-鄭,郑,zhèng,surname,155,5,,
-馮,冯,féng,surname,156,5,,
-蔣,蒋,jiǎng,surname,157,5,,
-韓,韩,hán,surname,158,5,,
-楊,杨,yáng,surname,159,5,,
-朱,朱,zhū,vermilion / surname,160,5,,
-秦,秦,qín,surname,161,5,,
-呂,吕,lǚ,surname,162,5,,
-曹,曹,cáo,surname,163,5,,
-魏,魏,wèi,surname,164,5,,
-陶,陶,táo,pottery / surname,165,5,,
-盧,卢,lú,surname,166,5,,
-須,须,xū,necessary / surname,167,5,,
+trad,simp,pinyin,English,examples,idx,priority,diff,known
+這,这,zhè,this,这个(這個);这里(這裡);这样(這樣),1,1,,4
+來,来,lái,to come,回来(回來);来到(來到);未来(未來),2,1,,2
+國,国,guó,country,国家(國家);中国(中國);外国(外國),3,1,,2
+個,个,gè,measure word (general),个人(個人);个子(個子);各个(各個),4,1,,1
+說,说,shuō,to speak,说话(說話);说明(說明);小说(小說),5,1,,2
+們,们,men,plural marker,我们(我們);他们(他們);人们(人們),6,1,,2
+為,为,wèi,for / because,因为(因為);为了(為了);成为(成為),7,1,,3
+時,时,shí,time,时间(時間);时候(時候);同时(同時),8,1,,2
+會,会,huì,can / will,会议(會議);机会(機會);社会(社會),9,1,,4
+過,过,guò,to cross / past,过去(過去);经过(經過);超过(超過),10,1,,5
+學,学,xué,to learn,学习(學習);学生(學生);学校(學校),11,1,,1
+對,对,duì,towards / correct,对方(對方);面对(面對);对于(對於),12,1,,5
+裡,里,lǐ,inside,里面(裡面);这里(這裡);公里(公里),13,1,,2
+後,后,hòu,after / behind,后来(後來);以后(以後);最后(最後),14,1,,5
+麼,么,me,question particle,什么(什麼);怎么(怎麼);那么(那麼),15,1,,1
+沒,没,méi,not have,没有(沒有);没事(沒事);没关系(沒關係),16,1,,1
+於,于,yú,in / at / on,关于(關於);由于(由於);对于(對於),17,1,,5
+還,还,hái,still / yet,还有(還有);还是(還是);还好(還好),18,1,,4
+發,发,fā,to send / emit,发现(發現);发生(發生);发展(發展),19,1,,4
+隻,只,zhī,measure word (animals),只是(只是);只有(只有);只要(只要),20,1,,5
+當,当,dāng,to act as / should,当然(當然);当时(當時);当地(當地),21,1,,5
+開,开,kāi,to open,开始(開始);开车(開車);离开(離開),22,1,,2
+實,实,shí,real / true,其实(其實);实际(實際);实现(實現),23,1,,5
+經,经,jīng,classic / to pass,已经(已經);经过(經過);经验(經驗),24,1,,4
+進,进,jìn,to enter,进入(進入);进步(進步);前进(前進),25,1,,5
+現,现,xiàn,now / to appear,现在(現在);发现(發現);出现(出現),26,1,,4
+長,长,cháng,long,长大(長大);成长(成長);校长(校長),27,1,,3
+動,动,dòng,to move,运动(運動);活动(活動);动作(動作),28,1,,4
+樣,样,yàng,kind / type,这样(這樣);一样(一樣);样子(樣子),29,1,,4
+頭,头,tóu,head,头发(頭髮);里头(裡頭);回头(回頭),30,1,,1
+機,机,jī,machine,机会(機會);手机(手機);飞机(飛機),31,1,,1
+無,无,wú,without,无法(無法);无论(無論);无聊(無聊),32,1,,4
+關,关,guān,to close / related,关系(關係);关于(關於);关心(關心),33,1,,4
+從,从,cóng,from,从来(從來);从前(從前);从事(從事),34,1,,1
+見,见,jiàn,to see,看见(看見);见面(見面);意见(意見),35,1,,2
+馬,马,mǎ,horse,马上(馬上);马路(馬路);马车(馬車),36,1,,1
+車,车,chē,vehicle,汽车(汽車);火车(火車);开车(開車),37,1,,2
+記,记,jì,to remember,记得(記得);记录(記錄);记者(記者),38,1,,1
+東,东,dōng,east,东西(東西);东方(東方);广东(廣東),39,1,,1
+難,难,nán,difficult,困难(困難);难过(難過);难道(難道),40,1,,4
+點,点,diǎn,point / dot,一点(一點);地点(地點);重点(重點),41,1,,3
+貝,贝,bèi,shell / surname,宝贝(寶貝);贝壳(貝殼),42,1,,2
+聲,声,shēng,sound,声音(聲音);大声(大聲);声明(聲明),43,2,,4
+報,报,bào,to report,报告(報告);报名(報名);报纸(報紙),44,2,,2
+將,将,jiāng,will / shall,将来(將來);即将(即將);将近(將近),45,2,,4
+寫,写,xiě,to write,写作(寫作);写字(寫字);书写(書寫),46,2,,5
+親,亲,qīn,parent / relative,亲人(親人);父亲(父親);母亲(母親),47,2,,5
+愛,爱,ài,to love,爱情(愛情);可爱(可愛);爱好(愛好),48,2,,4
+張,张,zhāng,measure word / surname,张开(張開);紧张(緊張);夸张(誇張),49,2,,5
+則,则,zé,rule / standard,否则(否則);原则(原則);规则(規則),50,2,,4
+認,认,rèn,to recognize,认识(認識);认为(認為);认真(認真),51,2,,5
+邊,边,biān,side / edge,旁边(旁邊);这边(這邊);一边(一邊),52,2,,4
+變,变,biàn,to change,变化(變化);改变(改變);变成(變成),53,2,,5
+許,许,xǔ,to allow,也许(也許);许多(許多);允许(允許),54,2,,4
+問,问,wèn,to ask,问题(問題);请问(請問);访问(訪問),55,2,,5
+講,讲,jiǎng,to speak / explain,讲话(講話);讲座(講座);演讲(演講),56,2,,5
+論,论,lùn,to discuss,讨论(討論);无论(無論);理论(理論),57,2,,5
+書,书,shū,book,书店(書店);读书(讀書);书法(書法),58,2,,5
+遠,远,yuǎn,far,远方(遠方);永远(永遠);远离(遠離),59,2,,5
+廠,厂,chǎng,factory,工厂(工廠);厂家(廠家);厂长(廠長),60,2,,4
+黨,党,dǎng,party (political),党员(黨員);政党(政黨);共产党(共產黨),61,2,,5
+萬,万,wàn,ten thousand,千万(千萬);百万(百萬);万一(萬一),62,2,,5
+門,门,mén,door / gate,门口(門口);出门(出門);部门(部門),63,2,,4
+風,风,fēng,wind,风景(風景);刮风(颳風);风格(風格),64,2,,4
+語,语,yǔ,language,语言(語言);英语(英語);汉语(漢語),65,2,,4
+單,单,dān,single,简单(簡單);单位(單位);名单(名單),66,2,,4
+臺,台,tái,platform / stand,台湾(臺灣);舞台(舞臺);台风(颱風),67,2,,4
+華,华,huá,China / splendid,中华(中華);华人(華人);华丽(華麗),68,2,,5
+鮮,鲜,xiān,fresh,新鲜(新鮮);鲜花(鮮花);海鲜(海鮮),69,2,,4
+衛,卫,wèi,to guard,卫生(衛生);保卫(保衛);卫星(衛星),70,2,,5
+陽,阳,yáng,sun / positive,太阳(太陽);阳光(陽光);阳台(陽臺),71,2,,5
+陰,阴,yīn,negative / shade,阴天(陰天);阴影(陰影);阴阳(陰陽),72,2,,5
+雲,云,yún,cloud / surname,白云(白雲);云彩(雲彩);乌云(烏雲),73,2,,4
+響,响,xiǎng,sound / to resound,影响(影響);响声(響聲);反响(反響),74,3,,6
+務,务,wù,affair / business,服务(服務);任务(任務);业务(業務),75,3,,6
+帶,带,dài,to bring,带来(帶來);皮带(皮帶);地带(地帶),76,3,,6
+業,业,yè,business / industry,工业(工業);专业(專業);毕业(畢業),77,3,,6
+畫,画,huà,picture / to draw,画画(畫畫);图画(圖畫);漫画(漫畫),78,3,,6
+場,场,chǎng,field / place,市场(市場);机场(機場);现场(現場),79,3,,6
+達,达,dá,to reach,达到(達到);表达(表達);发达(發達),80,3,,6
+觀,观,guān,to view,观点(觀點);参观(參觀);乐观(樂觀),81,3,,6
+辦,办,bàn,to handle / do,办法(辦法);办理(辦理);办公室(辦公室),82,3,,6
+眾,众,zhòng,crowd / masses,观众(觀眾);群众(群眾);大众(大眾),83,3,,6
+體,体,tǐ,body / form,身体(身體);体育(體育);具体(具體),84,3,,6
+備,备,bèi,to prepare,准备(準備);设备(設備);具备(具備),85,3,,6
+隊,队,duì,team,队伍(隊伍);球队(球隊);排队(排隊),86,3,,6
+該,该,gāi,should / ought,应该(應該);活该(活該),87,3,,6
+擊,击,jī,to strike,打击(打擊);攻击(攻擊);点击(點擊),88,3,,6
+舊,旧,jiù,old (not new),旧事(舊事);依旧(依舊);怀旧(懷舊),89,3,,6
+導,导,dǎo,to guide,领导(領導);导致(導致);导演(導演),90,3,,6
+製,制,zhì,to make / system,制度(制度);控制(控制);制造(製造),91,3,,6
+況,况,kuàng,situation,情况(情況);况且(況且);状况(狀況),92,3,,6
+縣,县,xiàn,county,县城(縣城);县长(縣長),93,3,,6
+層,层,céng,layer,一层(一層);高层(高層);层次(層次),94,3,,6
+節,节,jié,festival / section,节目(節目);春节(春節);季节(季節),95,3,,6
+細,细,xì,thin / fine,仔细(仔細);详细(詳細);细节(細節),96,3,,6
+麗,丽,lì,beautiful,美丽(美麗);华丽(華麗);壮丽(壯麗),97,3,,6
+藥,药,yào,medicine,药物(藥物);吃药(吃藥);中药(中藥),98,3,,6
+陸,陆,lù,land,大陆(大陸);陆地(陸地);登陆(登陸),99,3,,6
+錢,钱,qián,money,金钱(金錢);花钱(花錢);赚钱(賺錢),100,3,,6
+謝,谢,xiè,to thank / surname,谢谢(謝謝);感谢(感謝);道谢(道謝),101,3,,6
+費,费,fèi,to cost / surname,费用(費用);浪费(浪費);消费(消費),102,3,,6
+湯,汤,tāng,soup / surname,喝汤(喝湯);汤圆(湯圓);鸡汤(雞湯),103,3,,6
+畢,毕,bì,complete / surname,毕业(畢業);毕竟(畢竟),104,3,,6
+樂,乐,lè,happy / surname,快乐(快樂);音乐(音樂);乐趣(樂趣),105,3,,6
+黃,黄,huáng,yellow / surname,黄色(黃色);黄河(黃河);蛋黄(蛋黃),106,3,,6
+紀,纪,jǐ,surname,世纪(世紀);年纪(年紀);纪律(紀律),107,3,,6
+藍,蓝,lán,blue / surname,蓝色(藍色);蓝天(藍天);蔚蓝(蔚藍),108,3,,6
+強,强,qiáng,strong / surname,强大(強大);加强(加強);坚强(堅強),109,3,,6
+鍾,钟,zhōng,clock / surname,分钟(分鐘);时钟(時鐘);闹钟(鬧鐘),110,3,,6
+經,经,jīng,surname,已经(已經);经过(經過);经验(經驗),111,3,,6
+應,应,yīng,should / surname,应该(應該);应用(應用);反应(反應),112,3,,6
+龍,龙,lóng,dragon / surname,龙头(龍頭);恐龙(恐龍);龙舟(龍舟),113,3,,6
+從,从,cóng,surname,从来(從來);从前(從前);从事(從事),114,3,,6
+喬,乔,qiáo,tall / surname,乔木(喬木),115,3,,6
+陰,阴,yīn,surname,阴天(陰天);阴影(陰影);阴阳(陰陽),116,3,,6
+雙,双,shuāng,pair / surname,双方(雙方);双手(雙手);双重(雙重),117,3,,6
+黨,党,dǎng,surname,党员(黨員);政党(政黨);共产党(共產黨),118,3,,6
+勞,劳,láo,toil / surname,劳动(勞動);辛劳(辛勞);疲劳(疲勞),119,3,,6
+農,农,nóng,farming / surname,农民(農民);农村(農村);农业(農業),120,3,,6
+習,习,xí,to practice / surname,学习(學習);习惯(習慣);练习(練習),121,3,,6
+魚,鱼,yú,fish / surname,鱼肉(魚肉);金鱼(金魚);钓鱼(釣魚),122,3,,6
+廣,广,guǎng,wide / surname,广告(廣告);广场(廣場);广大(廣大),123,3,,6
+關,关,guān,surname,关系(關係);关于(關於);关心(關心),124,3,,6
+陳,陈,chén,surname,陈旧(陳舊);陈列(陳列);陈述(陳述),125,4,,6
+趙,赵,zhào,surname,-,126,4,,6
+孫,孙,sūn,surname,孙子(孫子);子孙(子孫);孙女(孫女),127,4,,6
+許,许,xǔ,surname,也许(也許);许多(許多);允许(允許),128,4,,6
+何,何,hé,what / surname,任何(任何);如何(如何);为何(為何),129,4,,6
+施,施,shī,to apply / surname,实施(實施);措施(措施);施工(施工),130,4,,6
+孔,孔,kǒng,hole / surname,孔子(孔子);孔雀(孔雀);面孔(面孔),131,4,,6
+嚴,严,yán,strict,严重(嚴重);严格(嚴格);严肃(嚴肅),132,4,,6
+姜,姜,jiāng,ginger,生姜(生薑);姜汤(薑湯),133,4,,6
+章,章,zhāng,chapter / surname,文章(文章);章节(章節);章程(章程),134,4,,6
+蘇,苏,sū,revive / surname,苏醒(甦醒);复苏(復甦);江苏(江蘇),135,4,,6
+羅,罗,luó,net / surname,罗马(羅馬);罗盘(羅盤),136,4,,6
+項,项,xiàng,neck / surname,项目(項目);事项(事項);选项(選項),137,4,,6
+顏,颜,yán,face / surname,颜色(顏色);颜料(顏料);容颜(容顏),138,4,,6
+計,计,jì,plan / surname,计划(計劃);计算(計算);设计(設計),139,4,,6
+談,谈,tán,to talk / surname,谈话(談話);交谈(交談);谈论(談論),140,4,,6
+單,单,shàn,surname,简单(簡單);单位(單位);名单(名單),141,4,,6
+懷,怀,huái,to cherish / surname,怀疑(懷疑);怀念(懷念);关怀(關懷),142,4,,6
+蒼,苍,cāng,dark green / surname,苍白(蒼白);苍老(蒼老);苍蝇(蒼蠅),143,4,,6
+聞,闻,wén,to hear / surname,新闻(新聞);听闻(聽聞);闻名(聞名),144,4,,6
+卻,却,què,but / to retreat,忘却(忘卻);退却(退卻);冷却(冷卻),145,4,,6
+邊,边,biān,surname,旁边(旁邊);这边(這邊);一边(一邊),146,4,,6
+溫,温,wēn,warm / surname,温度(溫度);温暖(溫暖);体温(體溫),147,4,,6
+莊,庄,zhuāng,village / surname,村庄(村莊);庄园(莊園);庄重(莊重),148,4,,6
+連,连,lián,to link / surname,连接(連接);连续(連續);连忙(連忙),149,4,,6
+終,终,zhōng,end / surname,终于(終於);最终(最終);始终(始終),150,4,,6
+簡,简,jiǎn,simple / surname,简单(簡單);简介(簡介);简直(簡直),151,4,,6
+養,养,yǎng,to raise / surname,营养(營養);培养(培養);养成(養成),152,4,,6
+紅,红,hóng,red / surname,红色(紅色);红酒(紅酒);红包(紅包),153,4,,6
+蓋,盖,gài,to cover / surname,盖子(蓋子);覆盖(覆蓋);膝盖(膝蓋),154,4,,6
+鄭,郑,zhèng,surname,郑重(鄭重),155,5,,6
+韓,韩,hán,surname,韩国(韓國);韩语(韓語);韩剧(韓劇),156,5,,6
+楊,杨,yáng,surname,杨树(楊樹);白杨(白楊),157,5,,6
+須,须,xū,necessary / surname,必须(必須);须知(須知);胡须(鬍鬚),158,5,,6

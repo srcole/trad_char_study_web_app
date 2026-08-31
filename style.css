@@ -92,6 +92,46 @@ h2 { margin: 0 0 10px; }
 .game-toolbar .progress { margin: 0; }
 .danger-button { padding: 9px 12px; background: #d64545; }
 
+.completion-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #e8f6ee;
+  color: #2e9d59;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.end-message {
+  margin: 8px 0 25px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.final-examples {
+  margin: -12px 0 24px;
+  padding: 12px;
+  border-radius: 9px;
+  background: #f4f6f8;
+  color: #444;
+  line-height: 1.6;
+}
+
+.end-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  padding: 18px 8px;
+  border-radius: 12px;
+  background: #f4f6f8;
+  text-align: center;
+}
+
+#homeButton { width: 100%; }
+
 .progress {
   color: #888;
   font-size: 0.9rem;
