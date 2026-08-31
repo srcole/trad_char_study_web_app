@@ -97,11 +97,11 @@ answerForm.addEventListener("submit", event => {
   const isCorrect = userAnswer === currentCharacter.simp;
   totalAnswers++; if (isCorrect) correctAnswers++;
   results.push({ idx: currentCharacter.idx, correct: isCorrect ? 1 : 0 });
-  resultMessage.textContent = isCorrect ? "Correct!" : `Not quite. You answered: ${userAnswer}`;
-  resultMessage.className = isCorrect ? "correct" : "incorrect";
+  resultMessage.textContent = isCorrect ? "Correct!" : "";
+  resultMessage.className = isCorrect ? "correct" : "hidden";
   correctCharacter.textContent = currentCharacter.simp; pinyin.textContent = currentCharacter.pinyin || "—";
   english.textContent = currentCharacter.English || "—";
-  examples.textContent = formatExamples(currentCharacter.examples);
+  renderExamples(currentCharacter.examples);
   updateStats();
   answerInput.disabled = true; submitButton.disabled = true; feedback.classList.remove("hidden");
   if (!gameCharacters.length) endGame(true);
@@ -114,7 +114,22 @@ function updateStats() {
 
 function formatExamples(value) {
   if (!value) return "—";
-  return value.split(";").map(example => example.trim()).filter(Boolean).join(" · ");
+  return value.split(";").map(example => example.trim()).filter(Boolean).join("\n");
+}
+
+function renderExamples(value) {
+  const words = value?.split(";").map(word => word.trim()).filter(Boolean) || [];
+  examples.replaceChildren();
+  if (!words.length) {
+    examples.textContent = "—";
+    return;
+  }
+  words.forEach(word => {
+    const line = document.createElement("span");
+    line.className = "example-word";
+    line.textContent = word;
+    examples.appendChild(line);
+  });
 }
 
 function makeResultsCSV() {
@@ -140,7 +155,7 @@ function endGame(completed = false) {
     : "Your progress has been recorded. Return home when you are ready.";
   const finalExamples = byId("finalExamples");
   if (completed && currentCharacter?.examples) {
-    finalExamples.textContent = `Final examples: ${formatExamples(currentCharacter.examples)}`;
+    finalExamples.textContent = `Final examples:\n${formatExamples(currentCharacter.examples)}`;
     finalExamples.classList.remove("hidden");
   } else {
     finalExamples.textContent = "";

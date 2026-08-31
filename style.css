@@ -117,7 +117,9 @@ h2 { margin: 0 0 10px; }
   border-radius: 9px;
   background: #f4f6f8;
   color: #444;
-  line-height: 1.6;
+  font-size: 2.5rem;
+  line-height: 1.8;
+  white-space: pre-line;
 }
 
 .end-stats {
@@ -200,7 +202,7 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 }
 
 #resultMessage {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 18px;
 }
@@ -220,6 +222,16 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
   text-align: left;
   margin-bottom: 18px;
   line-height: 1.9;
+  font-size: 2rem;
+}
+
+#examples {
+  display: block;
+  margin-top: 6px;
+  padding-left: 12px;
+  font-size: 3rem;
+  line-height: 1.8;
+  white-space: pre-line;
 }
 
 .detail-label {
@@ -227,13 +239,43 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 }
 
 .correct-character {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   vertical-align: middle;
 }
 
 #nextButton {
   width: 100%;
   background: #333;
+}
+
+/* Keep all post-guess feedback at exactly twice its original scale. */
+.feedback #resultMessage {
+  font-size: 1.5rem;
+}
+
+.feedback .answer-details,
+.feedback .detail-label,
+.feedback #pinyin,
+.feedback #english {
+  font-size: 1.5rem;
+}
+
+.feedback .correct-character {
+  font-size: 1.5rem;
+}
+
+.feedback #examples {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.feedback .example-word {
+  display: block;
+}
+
+.feedback #nextButton {
+  padding: 14px 18px;
+  font-size: 1.5rem;
 }
 
 .stats {
@@ -278,4 +320,6 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
   }
 
   .options-grid { grid-template-columns: 1fr; }
+
+  .final-examples { font-size: 2rem; }
 }
