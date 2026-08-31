@@ -16,18 +16,19 @@
         <label for="maxPriority">Maximum priority level<input id="maxPriority" type="number" min="1" step="1" placeholder="Any" /></label>
         <label for="minKnown">Minimum known level<input id="minKnown" type="number" min="0" step="1" placeholder="Any" /></label>
       </div>
+      <label class="export-option" for="exportCsv">
+        <input id="exportCsv" type="checkbox" checked />
+        Download results CSV when the game ends
+      </label>
       <p id="selectionSummary" class="selection-summary">Loading characters…</p>
       <button id="startButton" type="button" disabled>Start Game</button>
-      <section id="results" class="results hidden" aria-live="polite">
-        <h2>Last game results</h2><p id="downloadStatus"></p><pre id="csvOutput"></pre>
-      </section>
     </section>
     <div id="gameScreen" class="hidden">
       <section class="card">
         <div class="game-toolbar"><div class="progress" id="progress">Question 1</div><button id="endGameButton" class="danger-button" type="button">End Game</button></div>
         <div class="label">Traditional Chinese</div><div class="character" id="traditionalCharacter"></div>
         <form id="answerForm">
-          <input id="answerInput" type="text" maxlength="5" autocomplete="off" placeholder="Type up to 5 characters" />
+          <input id="answerInput" type="text" maxlength="10" autocomplete="off" placeholder="简体字" />
           <button type="submit" id="submitButton">Check Answer</button>
         </form>
         <div id="feedback" class="feedback hidden">

@@ -3,6 +3,7 @@ let correctAnswers = 0, totalAnswers = 0, questionNumber = 0;
 const byId = id => document.getElementById(id);
 const homeScreen = byId("homeScreen"), gameScreen = byId("gameScreen");
 const maxPriority = byId("maxPriority"), minKnown = byId("minKnown");
+const exportCsv = byId("exportCsv");
 const startButton = byId("startButton"), selectionSummary = byId("selectionSummary");
 const traditionalCharacter = byId("traditionalCharacter"), answerInput = byId("answerInput");
 const answerForm = byId("answerForm"), submitButton = byId("submitButton");
@@ -63,7 +64,7 @@ function updateSelectionSummary() {
 function startGame() {
   gameCharacters = selectedCharacters(); if (!gameCharacters.length) return;
   currentCharacter = null; results = []; correctAnswers = 0; totalAnswers = 0; questionNumber = 0;
-  updateStats(); byId("results").classList.add("hidden");
+  updateStats();
   homeScreen.classList.add("hidden"); gameScreen.classList.remove("hidden"); nextQuestion();
 }
 
@@ -97,24 +98,25 @@ function updateStats() {
 }
 
 function makeResultsCSV() {
-  const ordered = [...results].sort((a, b) => Number(a.idx) - Number(b.idx));
-  return ["index,correct", ...ordered.map(item => `${item.idx},${item.correct}`)].join("\n");
+  const answerByIndex = new Map(results.map(result => [result.idx, result.correct]));
+  const rows = [...characters]
+    .sort((a, b) => Number(a.idx) - Number(b.idx))
+    .map(character => `${character.idx},${answerByIndex.get(character.idx) ?? -1}`);
+  return ["index,correct", ...rows].join("\n");
 }
 
 function endGame() {
-  const csv = makeResultsCSV(); byId("csvOutput").textContent = csv; byId("results").classList.remove("hidden");
-  const status = byId("downloadStatus");
-  if (results.length) {
+  if (exportCsv.checked) {
+    const csv = makeResultsCSV();
     const blobUrl = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     const link = document.createElement("a"); link.href = blobUrl;
     link.download = `traditional-character-results-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(blobUrl);
-    status.textContent = "Your ordered CSV was downloaded. It is also shown below.";
-  } else status.textContent = "No answers were recorded. The empty CSV is shown below.";
+  }
   gameScreen.classList.add("hidden"); homeScreen.classList.remove("hidden"); currentCharacter = null;
 }
 
-answerInput.addEventListener("input", () => { answerInput.value = Array.from(answerInput.value).slice(0, 5).join(""); });
+answerInput.addEventListener("input", () => { answerInput.value = Array.from(answerInput.value).slice(0, 10).join(""); });
 maxPriority.addEventListener("input", updateSelectionSummary); minKnown.addEventListener("input", updateSelectionSummary);
 startButton.addEventListener("click", startGame); nextButton.addEventListener("click", nextQuestion);
 byId("endGameButton").addEventListener("click", endGame);
