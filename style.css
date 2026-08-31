@@ -42,6 +42,56 @@ h1 {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
+h2 { margin: 0 0 10px; }
+
+.setup-help, .selection-summary, #downloadStatus { color: #666; }
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 25px 0 15px;
+  text-align: left;
+}
+
+.options-grid label { color: #555; font-size: 0.9rem; font-weight: bold; }
+
+.options-grid input {
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 9px;
+  font-size: 1rem;
+}
+
+#startButton { width: 100%; }
+
+.game-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.game-toolbar .progress { margin: 0; }
+.danger-button { padding: 9px 12px; background: #d64545; }
+
+.results {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #ddd;
+  text-align: left;
+}
+
+#csvOutput {
+  max-height: 220px;
+  overflow: auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f4f6f8;
+}
+
 .progress {
   color: #888;
   font-size: 0.9rem;
@@ -96,6 +146,8 @@ button {
 button:hover {
   opacity: 0.9;
 }
+
+button:disabled { cursor: not-allowed; opacity: 0.5; }
 
 .feedback {
   margin-top: 25px;
@@ -184,4 +236,6 @@ button:hover {
   #answerForm {
     flex-direction: column;
   }
+
+  .options-grid { grid-template-columns: 1fr; }
 }

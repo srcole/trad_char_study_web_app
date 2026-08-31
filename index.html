@@ -4,89 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traditional → Simplified Chinese</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <main class="game-container">
-    <header>
-      <h1>Traditional → Simplified</h1>
-      <p class="subtitle">
-        Type the corresponding simplified Chinese character.
-      </p>
-    </header>
-
-    <section class="card">
-      <div class="progress" id="progress">Question 1</div>
-
-      <div class="label">Traditional Chinese</div>
-
-      <div class="character" id="traditionalCharacter">
-        這
+    <header><h1>Traditional → Simplified</h1><p class="subtitle">Type the corresponding simplified Chinese character.</p></header>
+    <section id="homeScreen" class="card">
+      <h2>Game options</h2>
+      <p class="setup-help">Leave either option blank if you do not want to use that filter.</p>
+      <div class="options-grid">
+        <label for="maxPriority">Maximum priority level<input id="maxPriority" type="number" min="1" step="1" placeholder="Any" /></label>
+        <label for="minKnown">Minimum known level<input id="minKnown" type="number" min="0" step="1" placeholder="Any" /></label>
       </div>
-
-      <form id="answerForm">
-        <input
-          id="answerInput"
-          type="text"
-          maxlength="1"
-          autocomplete="off"
-          placeholder="Type simplified character"
-          autofocus
-        />
-
-        <button type="submit" id="submitButton">
-          Check Answer
-        </button>
-      </form>
-
-      <div id="feedback" class="feedback hidden">
-        <div id="resultMessage"></div>
-
-        <div class="answer-details">
-          <div>
-            <span class="detail-label">Simplified:</span>
-            <span id="correctCharacter" class="correct-character"></span>
+      <p id="selectionSummary" class="selection-summary">Loading characters…</p>
+      <button id="startButton" type="button" disabled>Start Game</button>
+      <section id="results" class="results hidden" aria-live="polite">
+        <h2>Last game results</h2><p id="downloadStatus"></p><pre id="csvOutput"></pre>
+      </section>
+    </section>
+    <div id="gameScreen" class="hidden">
+      <section class="card">
+        <div class="game-toolbar"><div class="progress" id="progress">Question 1</div><button id="endGameButton" class="danger-button" type="button">End Game</button></div>
+        <div class="label">Traditional Chinese</div><div class="character" id="traditionalCharacter"></div>
+        <form id="answerForm">
+          <input id="answerInput" type="text" maxlength="5" autocomplete="off" placeholder="Type up to 5 characters" />
+          <button type="submit" id="submitButton">Check Answer</button>
+        </form>
+        <div id="feedback" class="feedback hidden">
+          <div id="resultMessage"></div>
+          <div class="answer-details">
+            <div><span class="detail-label">Simplified:</span> <span id="correctCharacter" class="correct-character"></span></div>
+            <div><span class="detail-label">Pinyin:</span> <span id="pinyin"></span></div>
+            <div><span class="detail-label">English:</span> <span id="english"></span></div>
           </div>
-
-          <div>
-            <span class="detail-label">Pinyin:</span>
-            <span id="pinyin"></span>
-          </div>
-
-          <div>
-            <span class="detail-label">English:</span>
-            <span id="english"></span>
-          </div>
+          <button id="nextButton" type="button">Next Character →</button>
         </div>
-
-        <button id="nextButton" type="button">
-          Next Character →
-        </button>
-      </div>
-    </section>
-
-    <section class="stats">
-      <div>
-        <span class="stat-number" id="correctCount">0</span>
-        <span class="stat-label">Correct</span>
-      </div>
-
-      <div>
-        <span class="stat-number" id="totalCount">0</span>
-        <span class="stat-label">Answered</span>
-      </div>
-
-      <div>
-        <span class="stat-number" id="accuracy">0%</span>
-        <span class="stat-label">Accuracy</span>
-      </div>
-    </section>
-
+      </section>
+      <section class="stats">
+        <div><span class="stat-number" id="correctCount">0</span><span class="stat-label">Correct</span></div>
+        <div><span class="stat-number" id="totalCount">0</span><span class="stat-label">Answered</span></div>
+        <div><span class="stat-number" id="accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+      </section>
+    </div>
     <p id="errorMessage" class="error-message"></p>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
