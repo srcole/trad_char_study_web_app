@@ -41,7 +41,10 @@ function parseCSV(text) {
   }
   if (value || row.length) { row.push(value); rows.push(row); }
   const headers = rows.shift().map(header => header.trim());
-  return rows.map(values => Object.fromEntries(headers.map((header, i) => [header, values[i]?.trim() || ""]))).filter(item => item.trad && item.simp);
+  return rows
+    .map(values => Object.fromEntries(headers.map((header, i) => [header, values[i]?.trim() || ""])))
+    .filter(item => item.trad && item.simp)
+    .map(item => ({ ...item, known: item.known || "5" }));
 }
 
 function selectedCharacters() {
@@ -50,7 +53,7 @@ function selectedCharacters() {
   return characters.filter(character => {
     const priority = Number(character.priority), known = Number(character.known);
     return (priorityLimit === null || (character.priority !== "" && priority <= priorityLimit)) &&
-      (knownLimit === null || (character.known !== "" && known >= knownLimit));
+      (knownLimit === null || known >= knownLimit);
   });
 }
 
