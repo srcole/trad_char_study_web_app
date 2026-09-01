@@ -6,6 +6,7 @@ const maxPriority = byId("maxPriority"), minKnown = byId("minKnown");
 const exportCsv = byId("exportCsv");
 const startButton = byId("startButton"), selectionSummary = byId("selectionSummary");
 const traditionalCharacter = byId("traditionalCharacter"), answerInput = byId("answerInput");
+const guessPanel = byId("guessPanel"), feedbackTraditional = byId("feedbackTraditional");
 const answerForm = byId("answerForm"), submitButton = byId("submitButton");
 const feedback = byId("feedback"), resultMessage = byId("resultMessage");
 const correctCharacter = byId("correctCharacter"), pinyin = byId("pinyin"), english = byId("english");
@@ -17,14 +18,14 @@ const progress = byId("progress"), errorMessage = byId("errorMessage");
 async function loadCharacters() {
   try {
     const response = await fetch("trad_to_simp_char.csv");
-    if (!response.ok) throw new Error("Could not load CSV file");
+    if (!response.ok) throw new Error("無法載入資料檔案");
     characters = parseCSV(await response.text());
-    if (!characters.length) throw new Error("No characters found in CSV");
+    if (!characters.length) throw new Error("資料檔案中沒有字詞");
     startButton.disabled = false;
     updateSelectionSummary();
   } catch (error) {
     console.error(error); selectionSummary.textContent = "";
-    errorMessage.textContent = "Could not load trad_to_simp_char.csv. Try running this with a local web server.";
+    errorMessage.textContent = "無法載入字詞資料。請嘗試使用本機網頁伺服器執行此應用程式。";
   }
 }
 
@@ -61,7 +62,7 @@ function selectedCharacters() {
 function updateSelectionSummary() {
   if (!characters.length) return;
   const count = selectedCharacters().length;
-  selectionSummary.textContent = `${count} of ${characters.length} characters match these options.`;
+  selectionSummary.textContent = `共有 ${count} 個字詞符合設定（總計 ${characters.length} 個）。`;
   startButton.disabled = count === 0;
 }
 
@@ -86,9 +87,9 @@ function nextQuestion() {
   if (!gameCharacters.length) { endGame(true); return; }
   currentCharacter = gameCharacters.pop(); questionNumber++;
   traditionalCharacter.textContent = currentCharacter.trad;
-  progress.textContent = `Question ${questionNumber} of ${questionNumber + gameCharacters.length}`;
+  progress.textContent = `第 ${questionNumber} 題，共 ${questionNumber + gameCharacters.length} 題`;
   answerInput.value = ""; answerInput.disabled = false; submitButton.disabled = false;
-  feedback.classList.add("hidden"); answerInput.focus();
+  feedback.classList.add("hidden"); guessPanel.classList.remove("hidden"); answerInput.focus();
 }
 
 answerForm.addEventListener("submit", event => {
@@ -97,13 +98,15 @@ answerForm.addEventListener("submit", event => {
   const isCorrect = userAnswer === currentCharacter.simp;
   totalAnswers++; if (isCorrect) correctAnswers++;
   results.push({ idx: currentCharacter.idx, correct: isCorrect ? 1 : 0 });
-  resultMessage.textContent = isCorrect ? "Correct!" : "";
+  resultMessage.textContent = isCorrect ? "答對了！" : "";
   resultMessage.className = isCorrect ? "correct" : "hidden";
+  feedbackTraditional.textContent = currentCharacter.trad;
   correctCharacter.textContent = currentCharacter.simp; pinyin.textContent = currentCharacter.pinyin || "—";
   english.textContent = currentCharacter.English || "—";
   renderExamples(currentCharacter.examples);
   updateStats();
-  answerInput.disabled = true; submitButton.disabled = true; feedback.classList.remove("hidden");
+  answerInput.disabled = true; submitButton.disabled = true;
+  guessPanel.classList.add("hidden"); feedback.classList.remove("hidden");
   if (!gameCharacters.length) endGame(true);
 });
 
@@ -149,13 +152,13 @@ function endGame(completed = false) {
     document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(blobUrl);
   }
   const percent = totalAnswers ? Math.round(correctAnswers / totalAnswers * 100) : 0;
-  byId("endTitle").textContent = completed ? "Game complete!" : "Game ended";
+  byId("endTitle").textContent = completed ? "遊戲完成！" : "遊戲已結束";
   byId("endMessage").textContent = completed
-    ? "You answered every available character. Great work!"
-    : "Your progress has been recorded. Return home when you are ready.";
+    ? "你已回答所有可用字詞，做得很好！"
+    : "你的進度已記錄。準備好後即可返回首頁。";
   const finalExamples = byId("finalExamples");
   if (completed && currentCharacter?.examples) {
-    finalExamples.textContent = `Final examples:\n${formatExamples(currentCharacter.examples)}`;
+    finalExamples.textContent = `最後一題例詞：\n${formatExamples(currentCharacter.examples)}`;
     finalExamples.classList.remove("hidden");
   } else {
     finalExamples.textContent = "";

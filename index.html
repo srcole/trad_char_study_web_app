@@ -1,67 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traditional → Simplified Chinese</title>
-  <link rel="stylesheet" href="style.css?v=4" />
+  <title>繁體字轉簡體字練習</title>
+  <link rel="stylesheet" href="style.css?v=8" />
 </head>
 <body>
   <main class="game-container">
-    <header><h1>Traditional → Simplified</h1><p class="subtitle">Type the corresponding simplified Chinese character.</p></header>
+    <header><h1>繁體字 → 簡體字</h1><p class="subtitle">請輸入對應的簡體字。</p></header>
     <section id="homeScreen" class="card">
-      <h2>Game options</h2>
-      <p class="setup-help">Leave either option blank if you do not want to use that filter.</p>
+      <h2>遊戲設定</h2>
+      <p class="setup-help">若不想使用某項篩選條件，請將該欄留白。</p>
       <div class="options-grid">
-        <label for="maxPriority">Maximum priority level<input id="maxPriority" type="number" min="1" step="1" value="2" placeholder="Any" /></label>
-        <label for="minKnown">Minimum known level<input id="minKnown" type="number" min="0" step="1" value="1" placeholder="Any" /></label>
+        <label for="maxPriority">優先等級上限<input id="maxPriority" type="number" min="1" step="1" value="2" placeholder="任意" /></label>
+        <label for="minKnown">最低熟悉程度<input id="minKnown" type="number" min="0" step="1" value="1" placeholder="任意" /></label>
       </div>
       <label class="export-option" for="exportCsv">
         <input id="exportCsv" type="checkbox" checked />
-        Download results CSV when the game ends
+        遊戲結束時下載結果檔案
       </label>
-      <p id="selectionSummary" class="selection-summary">Loading characters…</p>
-      <button id="startButton" type="button" disabled>Start Game</button>
+      <p id="selectionSummary" class="selection-summary">正在載入字詞……</p>
+      <button id="startButton" type="button" disabled>開始遊戲</button>
     </section>
     <div id="gameScreen" class="hidden">
       <section class="card">
-        <div class="game-toolbar"><div class="progress" id="progress">Question 1</div><button id="endGameButton" class="danger-button" type="button">End Game</button></div>
-        <div class="label">Traditional Chinese</div><div class="character" id="traditionalCharacter"></div>
-        <form id="answerForm">
-          <input id="answerInput" type="text" maxlength="10" autocomplete="off" placeholder="简体字" />
-          <button type="submit" id="submitButton">Check Answer</button>
-        </form>
+        <div class="game-toolbar"><div class="progress" id="progress">第 1 題</div><button id="endGameButton" class="danger-button" type="button">結束遊戲</button></div>
+        <div id="guessPanel">
+          <div class="label">繁體字</div><div class="character" id="traditionalCharacter"></div>
+          <form id="answerForm">
+            <input id="answerInput" type="text" maxlength="10" autocomplete="off" placeholder="輸入簡體字" />
+            <button type="submit" id="submitButton">確認</button>
+          </form>
+        </div>
         <div id="feedback" class="feedback hidden">
           <div id="resultMessage"></div>
           <div class="answer-details">
-            <div><span class="detail-label">Simplified:</span> <span id="correctCharacter" class="correct-character"></span></div>
-            <div><span class="detail-label">Pinyin:</span> <span id="pinyin"></span></div>
-            <div><span class="detail-label">English:</span> <span id="english"></span></div>
-            <div><span class="detail-label">Examples:</span> <span id="examples"></span></div>
+            <div><span class="detail-label">繁體：</span> <span id="feedbackTraditional"></span></div>
+            <div><span class="detail-label">簡體：</span> <span id="correctCharacter" class="correct-character"></span></div>
+            <div><span class="detail-label">拼音：</span> <span id="pinyin"></span></div>
+            <div><span class="detail-label">英文：</span> <span id="english"></span></div>
+            <div><span class="detail-label">例詞：</span> <span id="examples"></span></div>
           </div>
           <button id="nextButton" type="button">下一個詞</button>
         </div>
       </section>
       <section class="stats">
-        <div><span class="stat-number" id="correctCount">0</span><span class="stat-label">Correct</span></div>
-        <div><span class="stat-number" id="totalCount">0</span><span class="stat-label">Answered</span></div>
-        <div><span class="stat-number" id="accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        <div><span class="stat-number" id="correctCount">0</span><span class="stat-label">答對</span></div>
+        <div><span class="stat-number" id="totalCount">0</span><span class="stat-label">已回答</span></div>
+        <div><span class="stat-number" id="accuracy">0%</span><span class="stat-label">正確率</span></div>
       </section>
     </div>
     <section id="endScreen" class="card end-screen hidden" aria-live="polite">
       <div class="completion-mark">✓</div>
-      <h2 id="endTitle">Game complete</h2>
+      <h2 id="endTitle">遊戲完成</h2>
       <p id="endMessage" class="end-message"></p>
       <p id="finalExamples" class="final-examples hidden"></p>
       <div class="end-stats">
-        <div><span id="endCorrect" class="stat-number">0</span><span class="stat-label">Correct</span></div>
-        <div><span id="endAnswered" class="stat-number">0</span><span class="stat-label">Answered</span></div>
-        <div><span id="endAccuracy" class="stat-number">0%</span><span class="stat-label">Accuracy</span></div>
+        <div><span id="endCorrect" class="stat-number">0</span><span class="stat-label">答對</span></div>
+        <div><span id="endAnswered" class="stat-number">0</span><span class="stat-label">已回答</span></div>
+        <div><span id="endAccuracy" class="stat-number">0%</span><span class="stat-label">正確率</span></div>
       </div>
-      <button id="homeButton" type="button">Back to Home</button>
+      <button id="homeButton" type="button">返回首頁</button>
     </section>
     <p id="errorMessage" class="error-message"></p>
   </main>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
