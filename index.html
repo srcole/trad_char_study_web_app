@@ -15,7 +15,9 @@
       <div class="options-grid">
         <label for="maxPriority">優先等級上限<input id="maxPriority" type="number" min="1" step="1" value="2" placeholder="任意" /></label>
         <label for="minKnown">最低熟悉程度<input id="minKnown" type="number" min="0" step="1" value="1" placeholder="任意" /></label>
+        <label for="correctStreak">排除最近連續答對的字詞<input id="correctStreak" type="number" min="1" max="9" step="1" value="5" placeholder="次數（1–9），留白停用" aria-describedby="historyHelp" /></label>
       </div>
+      <p id="historyHelp" class="setup-help">每個繁體字保留最近 10 次作答紀錄。設定次數後，排除最近連續答對達該次數的字詞；紀錄不足的字詞仍會出現。</p>
       <label class="export-option" for="exportCsv">
         <input id="exportCsv" type="checkbox" checked />
         遊戲結束時下載結果檔案
@@ -63,8 +65,9 @@
       </div>
       <button id="homeButton" type="button">返回首頁</button>
     </section>
+    <p id="historyStatus" class="selection-summary" role="status">作答紀錄會自動儲存於此瀏覽器，供下次練習使用。</p>
     <p id="errorMessage" class="error-message"></p>
   </main>
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ let correctAnswers = 0, totalAnswers = 0, questionNumber = 0;
 const byId = id => document.getElementById(id);
 const homeScreen = byId("homeScreen"), gameScreen = byId("gameScreen"), endScreen = byId("endScreen");
 const maxPriority = byId("maxPriority"), minKnown = byId("minKnown");
+const correctStreak = byId("correctStreak");
 const exportCsv = byId("exportCsv");
 const startButton = byId("startButton"), selectionSummary = byId("selectionSummary");
 const traditionalCharacter = byId("traditionalCharacter"), answerInput = byId("answerInput");
@@ -14,6 +15,38 @@ const examples = byId("examples");
 const nextButton = byId("nextButton"), correctCount = byId("correctCount");
 const totalCount = byId("totalCount"), accuracy = byId("accuracy");
 const progress = byId("progress"), errorMessage = byId("errorMessage");
+const historyStatus = byId("historyStatus");
+const HISTORY_KEY = "traditional-character-history-v1";
+const HISTORY_LIMIT = 10;
+let answerHistory = loadAnswerHistory();
+
+function loadAnswerHistory() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || "{}");
+    if (!saved || typeof saved !== "object" || Array.isArray(saved)) throw new Error("Invalid history");
+    const history = Object.create(null);
+    for (const [trad, answers] of Object.entries(saved)) {
+      if (Array.isArray(answers) && answers.every(answer => answer === 0 || answer === 1)) {
+        history[trad] = answers.slice(-HISTORY_LIMIT);
+      }
+    }
+    return history;
+  } catch (error) {
+    historyStatus.textContent = "無法讀取瀏覽器紀錄；本次仍可繼續練習。";
+    return Object.create(null);
+  }
+}
+
+function recordAnswer(trad, isCorrect) {
+  // Oldest to newest: 1 = correct, 0 = incorrect.
+  answerHistory[trad] = [...(answerHistory[trad] || []), isCorrect ? 1 : 0].slice(-HISTORY_LIMIT);
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(answerHistory));
+    historyStatus.textContent = "作答紀錄已儲存於此瀏覽器。";
+  } catch (error) {
+    historyStatus.textContent = "無法儲存至瀏覽器；紀錄僅保留至本頁關閉或重新載入。";
+  }
+}
 
 async function loadCharacters() {
   try {
@@ -52,21 +85,31 @@ function parseCSV(text) {
 function selectedCharacters() {
   const priorityLimit = maxPriority.value === "" ? null : Number(maxPriority.value);
   const knownLimit = minKnown.value === "" ? null : Number(minKnown.value);
+  const streakLimit = correctStreak.value === "" ? null : Number(correctStreak.value);
   return characters.filter(character => {
     const priority = Number(character.priority), known = Number(character.known);
+    const history = answerHistory[character.trad] || [];
+    const mastered = streakLimit !== null && history.length >= streakLimit &&
+      history.slice(-streakLimit).every(answer => answer === 1);
     return (priorityLimit === null || (character.priority !== "" && priority <= priorityLimit)) &&
-      (knownLimit === null || known >= knownLimit);
+      (knownLimit === null || known >= knownLimit) && !mastered;
   });
 }
 
 function updateSelectionSummary() {
   if (!characters.length) return;
+  if (!correctStreak.validity.valid) {
+    selectionSummary.textContent = "連續答對次數請輸入 1 至 9 的整數，或留白以停用。";
+    startButton.disabled = true;
+    return;
+  }
   const count = selectedCharacters().length;
   selectionSummary.textContent = `共有 ${count} 個字詞符合設定（總計 ${characters.length} 個）。`;
   startButton.disabled = count === 0;
 }
 
 function startGame() {
+  if (!correctStreak.reportValidity()) return;
   gameCharacters = shuffle(selectedCharacters()); if (!gameCharacters.length) return;
   currentCharacter = null; results = []; correctAnswers = 0; totalAnswers = 0; questionNumber = 0;
   updateStats();
@@ -93,11 +136,12 @@ function nextQuestion() {
 }
 
 answerForm.addEventListener("submit", event => {
-  event.preventDefault(); if (!currentCharacter) return;
+  event.preventDefault(); if (!currentCharacter || submitButton.disabled) return;
   const userAnswer = answerInput.value.trim(); if (!userAnswer) return;
   const isCorrect = userAnswer === currentCharacter.simp;
   totalAnswers++; if (isCorrect) correctAnswers++;
   results.push({ idx: currentCharacter.idx, correct: isCorrect ? 1 : 0 });
+  recordAnswer(currentCharacter.trad, isCorrect);
   resultMessage.textContent = isCorrect ? "答對了！" : "";
   resultMessage.className = isCorrect ? "correct" : "hidden";
   feedbackTraditional.textContent = currentCharacter.trad;
@@ -155,7 +199,7 @@ function endGame(completed = false) {
   byId("endTitle").textContent = completed ? "遊戲完成！" : "遊戲已結束";
   byId("endMessage").textContent = completed
     ? "你已回答所有可用字詞，做得很好！"
-    : "你的進度已記錄。準備好後即可返回首頁。";
+    : "本次練習已結束。準備好後即可返回首頁。";
   const finalExamples = byId("finalExamples");
   if (completed && currentCharacter?.examples) {
     finalExamples.textContent = `最後一題例詞：\n${formatExamples(currentCharacter.examples)}`;
@@ -173,10 +217,12 @@ function endGame(completed = false) {
 function goHome() {
   endScreen.classList.add("hidden");
   homeScreen.classList.remove("hidden");
+  updateSelectionSummary();
 }
 
 answerInput.addEventListener("input", () => { answerInput.value = Array.from(answerInput.value).slice(0, 10).join(""); });
 maxPriority.addEventListener("input", updateSelectionSummary); minKnown.addEventListener("input", updateSelectionSummary);
+correctStreak.addEventListener("input", updateSelectionSummary);
 startButton.addEventListener("click", startGame); nextButton.addEventListener("click", nextQuestion);
 byId("endGameButton").addEventListener("click", () => endGame(false));
 byId("homeButton").addEventListener("click", goHome);
