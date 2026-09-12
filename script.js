@@ -19,6 +19,7 @@ const historyStatus = byId("historyStatus");
 const HISTORY_KEY = "traditional-character-history-v1";
 const HISTORY_LIMIT = 10;
 let answerHistory = loadAnswerHistory();
+let cancelVoiceWait = null;
 
 function loadAnswerHistory() {
   try {
@@ -127,6 +128,7 @@ function shuffle(items) {
 }
 
 function nextQuestion() {
+  stopPronunciation();
   if (!gameCharacters.length) { endGame(true); return; }
   currentCharacter = gameCharacters.pop(); questionNumber++;
   traditionalCharacter.textContent = currentCharacter.trad;
@@ -151,8 +153,65 @@ answerForm.addEventListener("submit", event => {
   updateStats();
   answerInput.disabled = true; submitButton.disabled = true;
   guessPanel.classList.add("hidden"); feedback.classList.remove("hidden");
+  speakAnswer(currentCharacter);
   if (!gameCharacters.length) endGame(true);
 });
+
+function stopPronunciation() {
+  if (cancelVoiceWait) cancelVoiceWait();
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+}
+
+function speakAnswer(character) {
+  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
+  const speech = window.speechSynthesis;
+  stopPronunciation();
+  const play = () => {
+    const voice = speech.getVoices()
+      .filter(voice => /^(?:zh$|zh[-_](?:CN|TW|SG|Hans|Hant)(?:[-_]|$)|cmn(?:[-_]|$))/i.test(voice.lang))
+      .sort((a, b) => voiceScore(b) - voiceScore(a))[0];
+    if (!voice) return false;
+    if (cancelVoiceWait) cancelVoiceWait();
+    byId("audioStatus").textContent = "";
+    queuePronunciation(character, voice);
+    return true;
+  };
+  if (play()) return;
+  byId("audioStatus").textContent = "正在載入中文語音……";
+  const onVoicesChanged = () => { play(); };
+  const timeout = window.setTimeout(() => {
+    if (play()) return;
+    cancelVoiceWait();
+    byId("audioStatus").textContent = "找不到國語語音。請在裝置的語音設定中安裝中文（台灣或中國）語音後重新載入。";
+  }, 3000);
+  cancelVoiceWait = () => {
+    window.clearTimeout(timeout);
+    speech.removeEventListener("voiceschanged", onVoicesChanged);
+    cancelVoiceWait = null;
+    byId("audioStatus").textContent = "";
+  };
+  speech.addEventListener("voiceschanged", onVoicesChanged);
+}
+
+function voiceScore(voice) {
+  // Prefer enhanced voices when available, then Taiwan Mandarin.
+  return (/natural|neural|premium|enhanced/i.test(voice.name) ? 100 : 0) +
+    (!voice.localService ? 20 : 0) + (/[-_]TW$/i.test(voice.lang) ? 10 : 0);
+}
+
+function queuePronunciation(character, voice) {
+  // Parentheses contain the same word in simplified Chinese; read each word once.
+  const words = (character.examples || "").split(";")
+    .map(word => word.replace(/\([^)]*\)|（[^）]*）/g, "").trim())
+    .filter(Boolean).slice(0, 3);
+  for (const text of [character.trad, ...words]) {
+    const utterance = new window.SpeechSynthesisUtterance(text);
+    utterance.lang = voice.lang;
+    utterance.voice = voice;
+    utterance.rate = 1;
+    window.speechSynthesis.speak(utterance);
+  }
+}
 
 function updateStats() {
   correctCount.textContent = correctAnswers; totalCount.textContent = totalAnswers;
@@ -188,6 +247,7 @@ function makeResultsCSV() {
 }
 
 function endGame(completed = false) {
+  if (!completed) stopPronunciation();
   if (exportCsv.checked) {
     const csv = makeResultsCSV();
     const blobUrl = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
@@ -215,6 +275,7 @@ function endGame(completed = false) {
 }
 
 function goHome() {
+  stopPronunciation();
   endScreen.classList.add("hidden");
   homeScreen.classList.remove("hidden");
   updateSelectionSummary();
@@ -226,4 +287,7 @@ correctStreak.addEventListener("input", updateSelectionSummary);
 startButton.addEventListener("click", startGame); nextButton.addEventListener("click", nextQuestion);
 byId("endGameButton").addEventListener("click", () => endGame(false));
 byId("homeButton").addEventListener("click", goHome);
+window.addEventListener("pagehide", stopPronunciation);
+// Trigger voice discovery before the first answer on browsers that load lazily.
+if ("speechSynthesis" in window) window.speechSynthesis.getVoices();
 loadCharacters();
